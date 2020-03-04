@@ -15,7 +15,6 @@ object mySolution extends App {
   def addLinkNums(list1: Node, list2: Node): Node = {
     def link(list1: Node, list2: Node, carry: Int): Node =
     (list1,list2) match {
-      case (Empty,Empty) => Empty
       case (ListNode(item1,next1),ListNode(item2,next2)) => {
         val sum = item1+item2+carry
         if (sum > 9) ListNode(sum%10,link(next1,next2,1))
@@ -72,9 +71,36 @@ object mySolution extends App {
 
      // 325 + 47 = 372
     (ListNode(5, ListNode(2, ListNode(3, Empty))),
-     ListNode(7, ListNode(4, ListNode(0, Empty))),
+     ListNode(7, ListNode(4, Empty)),
      ListNode(2, ListNode(7, ListNode(3, Empty))))
   )
+
+  def parseNode(list: Node): String = list match {
+    case Empty => "Empty"
+    case ListNode(item,next) => {
+      if (next == Empty) item.toString
+      else item.toString + " -> " + parseNode(next)
+    }
+  }
+
+  def displayNum(list: Node): String = list match {
+    case Empty => "0"
+    case ListNode(item,next) => {
+      if (next == Empty) item.toString
+      displayNum(next) + item.toString
+    }
+  }
+
+  def stripLeadZero(s: String): String = {
+    var i = 0
+    var s2 = s
+    if (s == "") ""
+    else {
+      var i = 0
+      while (i < s2.length && s2(i).toString == "0") s2 = s2.stripPrefix("0")
+      s2
+    }
+  }
 
   implicit class ConsoleColorise(val str: String) extends AnyVal {
     import Console._
@@ -93,10 +119,13 @@ object mySolution extends App {
     println(("Test #" + testNum).cyan)
     testNum += 1
     print("".white)
-    println("Node 1: " + test._1)
-    println("Node 2: " + test._2)
-    println("Expected: " + test._3)
-    println("Received: " + addLinkNums(test._1,test._2))
+    println("Node 1: " + parseNode(test._1))
+    println("Node 2: " + parseNode(test._2))
+    println("Expected: " + parseNode(test._3))
+    println("Received: " + parseNode(addLinkNums(test._1,test._2)))
+    val sum = displayNum(test._1).toInt + displayNum(test._2).toInt
+    println("Explanation: " + stripLeadZero(displayNum(test._1)) + " + " +
+            stripLeadZero(displayNum(test._2)) + " = " + sum)
     if (test._3 == addLinkNums(test._1,test._2)) println("PASSED".green)
     else println("**FAILED**".red)
     print("".white)
