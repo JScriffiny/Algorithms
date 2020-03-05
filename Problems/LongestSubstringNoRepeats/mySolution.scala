@@ -29,7 +29,7 @@ object mySolution extends App {
     best
   }
 
-  /**************   TESTING   **************/
+  //Tests
   val tests = Array[(String,Int)](
     ("",0),
     ("a",1),
@@ -37,6 +37,8 @@ object mySolution extends App {
     ("abcab",3),
     ("abrkaabcdefghijjxxx",10)
   )
+
+///////////////////////////////////////////////////////////////////
 
   implicit class ConsoleColorise(val str: String) extends AnyVal {
     import Console._

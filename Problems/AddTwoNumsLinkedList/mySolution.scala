@@ -40,7 +40,7 @@ object mySolution extends App {
     link(list1,list2,0)
   }
 
-  /**************   TESTING   **************/
+  //Tests
   val tests = Array[(Node,Node,Node)](
     (Empty,Empty,Empty),
 
@@ -74,6 +74,8 @@ object mySolution extends App {
      ListNode(7, ListNode(4, Empty)),
      ListNode(2, ListNode(7, ListNode(3, Empty))))
   )
+
+///////////////////////////////////////////////////////////////////
 
   def parseNode(list: Node): String = list match {
     case Empty => "Empty"

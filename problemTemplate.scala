@@ -1,5 +1,5 @@
 //Name: Jacob Scriffiny
-//File: mySolution.scala
+//File: problemTemplate.scala
 
 /** Problem:
 
@@ -10,17 +10,19 @@ object mySolution extends App {
     ???
   }
 
-  /**************   TESTING   **************/
+  //Tests
   val tests = Array[???](
     ???
   )
+
+///////////////////////////////////////////////////////////////////
 
   implicit class ConsoleColorise(val str: String) extends AnyVal {
     import Console._
     def red    = s"$RED$str"
     def green  = s"$GREEN$str"
     def white  = s"$WHITE$str"
-    def cyan = s"$CYAN$str"
+    def cyan   = s"$CYAN$str"
   }
 
   (1 to 60) foreach(_ => print("-"))
