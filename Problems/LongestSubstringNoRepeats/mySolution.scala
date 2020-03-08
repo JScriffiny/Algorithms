@@ -9,39 +9,18 @@ import scala.collection.mutable.HashSet
 
 object mySolution extends App {
 
-  //Second Attempt (linear) - O(n)
-  //Referenced geeksforgeeks.org
-  val numChars = 256
-  def uniqueRun(s: String): Int = {
-    val visited = Array.fill(numChars)(-1)
-    var bestLen = 0
-    for (i <- 0 until s.length) {
-      visited(s(i).toInt) += 1 //Log the char in visited
-      var curLen = 0
-      if (visited(s(i).toInt) == 0) { //Unique char
-        curLen += 1
-        visited(s(i).toInt) += 1
-      }
-      else { //Repeat char
-        visited(s(i).toInt) += curLen
-      }
-      bestLen = bestLen max curLen
-    }
-    bestLen
-  }
-
-  //First Attempt (too slow) - O(n^2 log n)
+  //O(n^2 log n)
   /**def uniqueRun(s: String): Int = {
     var best = 0
     for (i <- 0 until s.length) {
-      var visited = HashSet[Char](s(i))
+      var chars = HashSet[Char](s(i))
       var cur = 1
       if (i == s.length-1) cur = 1
       else {
         var j = i+1
-        while (j < s.length && !visited.contains(s(j))) { // O(log n)
+        while (j < s.length && !chars.contains(s(j))) { // O(log n)
           cur += 1
-          visited += s(j)
+          chars += s(j)
           j += 1
         }
         cur+1
@@ -51,12 +30,33 @@ object mySolution extends App {
     best
   }*/
 
+  //O(n)
+  val numChars = 256
+  def uniqueRun(s: String): Int = {
+    val chars = Array.fill(numChars)(0)
+    var bestLen = 0
+    var curLen = 0
+    for (c <- s) {
+      chars(c.toInt) += 1 //Increment the char's occurrences
+      if (chars(c.toInt) == 1) { //Unique char
+        curLen += 1
+      }
+      else { //Repeat char
+        bestLen = bestLen max curLen
+        chars(c.toInt) = 1
+        curLen = 0
+      }
+    }
+    bestLen
+  }
+
   //Tests
   val tests = Array[(String,Int)](
     ("",0),
     ("a",1),
     ("abcde",5),
     ("abcab",3),
+    ("abcalmnop",8),
     ("abrkaabcdefghijjxxx",10)
   )
 
