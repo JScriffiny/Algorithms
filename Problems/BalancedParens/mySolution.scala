@@ -25,17 +25,17 @@ object mySolution extends App {
       if (c == '(') parens.push(c)
       else if (c == ')') {
         try parens.pop()
-        catch {case _: Throwable => return false}
+        catch {case e: NoSuchElementException => return false}
       }
       else if (c == '{') braces.push(c)
       else if (c == '}') {
         try braces.pop()
-        catch {case _: Throwable => return false}
+        catch {case e: NoSuchElementException => return false}
       }
       else if (c == '[') brackets.push(c)
       else if (c == ']') {
         try brackets.pop()
-        catch {case _: Throwable => return false}
+        catch {case e: NoSuchElementException => return false}
       }
     }
     parens.isEmpty && braces.isEmpty && brackets.isEmpty
