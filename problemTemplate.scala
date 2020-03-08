@@ -25,9 +25,9 @@ object mySolution extends App {
     def cyan   = s"$CYAN$str"
   }
 
-  (1 to 60) foreach(_ => print("-"))
+  (1 to 50) foreach(_ => print("-"))
   println("\n#########   TESTING   #########")
-  (1 to 60) foreach(_ => print("-"))
+  (1 to 50) foreach(_ => print("-"))
   print("\n")
   var testNum = 1
   for (test <- tests) {
@@ -41,11 +41,11 @@ object mySolution extends App {
     else println("**FAILED**".red)
     print("".white)
     print("\n")
-    (1 to 60) foreach(_ => print("-"))
+    (1 to 50) foreach(_ => print("-"))
     print("\n")
   }
   val num = tests.count(test => algorithm(test._1) == test._2)
   println("#########   Passed " + num + "/" + tests.length + " tests   #########")
-  (1 to 60) foreach(_ => print("-"))
+  (1 to 50) foreach(_ => print("-"))
   print("\n")
 }
