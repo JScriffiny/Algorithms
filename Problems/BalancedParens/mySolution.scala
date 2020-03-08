@@ -23,11 +23,20 @@ object mySolution extends App {
     var brackets = Stack[Char]()
     for (c <- s) {
       if (c == '(') parens.push(c)
-      else if (c == ')') parens.pop()
+      else if (c == ')') {
+        try parens.pop()
+        catch {case _: Throwable => return false}
+      }
       else if (c == '{') braces.push(c)
-      else if (c == '}') braces.pop()
+      else if (c == '}') {
+        try braces.pop()
+        catch {case _: Throwable => return false}
+      }
       else if (c == '[') brackets.push(c)
-      else if (c == ']') brackets.pop()
+      else if (c == ']') {
+        try brackets.pop()
+        catch {case _: Throwable => return false}
+      }
     }
     parens.isEmpty && braces.isEmpty && brackets.isEmpty
   }
@@ -38,7 +47,8 @@ object mySolution extends App {
     ("[()]{}",true),
     ("[{({(})}])",true),
     ("{{(}(}[)[)]]",true),
-    ("({[)]",false)
+    ("({[)]",false),
+    (")]}{",false)
   )
 
 ///////////////////////////////////////////////////////////////////
@@ -51,9 +61,9 @@ object mySolution extends App {
     def cyan   = s"$CYAN$str"
   }
 
-  (1 to 60) foreach(_ => print("-"))
+  (1 to 50) foreach(_ => print("-"))
   println("\n#########   TESTING   #########")
-  (1 to 60) foreach(_ => print("-"))
+  (1 to 50) foreach(_ => print("-"))
   print("\n")
   var testNum = 1
   for (test <- tests) {
@@ -67,11 +77,11 @@ object mySolution extends App {
     else println("**FAILED**".red)
     print("".white)
     print("\n")
-    (1 to 60) foreach(_ => print("-"))
+    (1 to 50) foreach(_ => print("-"))
     print("\n")
   }
   val num = tests.count(test => isBalanced(test._1) == test._2)
   println("#########   Passed " + num + "/" + tests.length + " tests   #########")
-  (1 to 60) foreach(_ => print("-"))
+  (1 to 50) foreach(_ => print("-"))
   print("\n")
 }
