@@ -14,15 +14,30 @@ An input string is valid if:
 - Note that an empty string is also considered valid.
 */
 
+import scala.collection.mutable.Stack
+
 object mySolution extends App {
   def isBalanced(s: String): Boolean = {
-    false
+    var parens = Stack[Char]()
+    var braces = Stack[Char]()
+    var brackets = Stack[Char]()
+    for (c <- s) {
+      if (c == '(') parens.push(c)
+      else if (c == ')') parens.pop()
+      else if (c == '{') braces.push(c)
+      else if (c == '}') braces.pop()
+      else if (c == '[') brackets.push(c)
+      else if (c == ']') brackets.pop()
+    }
+    parens.isEmpty && braces.isEmpty && brackets.isEmpty
   }
 
   //Tests
   val tests = Array[(String,Boolean)] (
     ("((()))",true),
     ("[()]{}",true),
+    ("[{({(})}])",true),
+    ("{{(}(}[)[)]]",true),
     ("({[)]",false)
   )
 
