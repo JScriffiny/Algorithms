@@ -8,8 +8,25 @@ there are two numbers in the list that add up to the target.
 Challenge: Try to do it in a single pass of the list.
 */
 
+import scala.collection.mutable.HashSet
+
 object mySolution extends App {
+
+  //One Pass: O(n log n)
   def twoSum(list: List[Int], target: Int): Boolean = {
+    if (list.isEmpty || list.tail.isEmpty) false
+    else {
+      val seen = HashSet[Int](list.head)
+      for (num <- list.tail) {
+        seen += num
+        if (seen.contains(target-num)) return true
+      }
+      false
+    }
+  }
+
+  //Brute Force: O(n^2)
+  /**def twoSum(list: List[Int], target: Int): Boolean = {
     def getSum(cur: Int, rest: List[Int]): Int = {
       if (rest.tail.isEmpty) cur+rest.head
       else if (cur+rest.head != target) getSum(cur,rest.tail)
@@ -24,7 +41,7 @@ object mySolution extends App {
       }
       false
     }
-  }
+  }*/
 
   //Tests
   val tests = Array[(List[Int],Int,Boolean)](
