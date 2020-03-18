@@ -1,5 +1,5 @@
-//Name: Jacob Scriffiny
-//File: problemTemplate.scala
+//Name:
+//File:
 
 /** Problem:
 
