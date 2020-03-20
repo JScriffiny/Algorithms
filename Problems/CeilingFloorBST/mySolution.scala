@@ -43,10 +43,9 @@ object mySolution extends App {
 ///////////////////////////////////////////////////////////////////
 
   def parseTree(tree: Tree): String = tree match {
-    case Empty => "Empty"
-    case BST(left,item,right) => {
-      "*Awaiting Implementation*"
-    }
+    case Empty => "*"
+    case BST(left,item,right) =>
+      item.toString + " -> (" + parseTree(left) + ", " + parseTree(right) + ")"
   }
 
   implicit class ConsoleColorise(val str: String) extends AnyVal {
@@ -66,8 +65,8 @@ object mySolution extends App {
     println(("Test #" + testNum).cyan)
     testNum += 1
     print("".white)
-    println("k: " + test._2)
     println("BST:\n" + parseTree(test._1))
+    println("k: " + test._2 + "\n")
     println("Expected: " + test._3)
     println("Received: " + findHugging(test._1,test._2))
     if (findHugging(test._1,test._2) == test._3) println("PASSED".green)
