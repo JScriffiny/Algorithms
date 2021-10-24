@@ -1,2 +1,2 @@
 # Algorithms
-This repository is composed of my practice tailored towards coding-interview questions.
+My personal repository for practicing algorithm problems, similar to the style of coding-interview questions.
